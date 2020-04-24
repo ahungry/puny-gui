@@ -1,0 +1,12 @@
+*.db
+Thumbs.db*
+build/
+amalg/
+build.tar.gz
+*.zip
+*.tar.gz
+super-janet-app-linux64/
+*.dll
+*.so
+*.bin
+*.exe

@@ -1,0 +1,79 @@
+# -*- mode: makefile -*-
+
+# Include all the other things from various targets
+
+CC=x86_64-w64-mingw32-gcc
+
+CFLAGS=-Wall -std=c99 -fPIC
+LFLAGS=-lm -pthread -lwinmm \
+	-lmingw32 -lopengl32 -lpangowin32-1.0 -lgdi32 -lws2_32 -luuid -lcomctl32 -lole32  \
+	-lcomdlg32
+
+JANET_CFLAGS=-I./ -I./build/janet/build
+JANET_LFLAGS=-lcurl
+
+CURL_CFLAGS=
+CURL_LFLAGS=-lcurl
+
+IUP_CFLAGS=-I./build/win/iup/include
+IUP_LFLAGS=-L./build/win/iup \
+	-l:libiupim.a \
+	-l:libiup_scintilla.a \
+	-l:libfreetype6.a \
+	-l:libftgl.a \
+	-l:libiupcd.a \
+	-l:libiupcontrols.a \
+	-l:libiupgl.a \
+	-l:libiupglcontrols.a \
+	-l:libiup_mglplot.a \
+	-l:libiupole.a \
+	-l:libiup_plot.a \
+	-l:libiuptuio.a \
+	-l:libz.a \
+	-l:libiup.a \
+	-l:libiupimglib.a \
+	-l:libiupim.a \
+	-L./build/win/im \
+	-l:libim.a \
+	-l:libz.a
+
+CIRCLET_CFLAGS=-I./circlet
+CIRCLET_LFLAGS=-ladvapi32 -L/usr/x86_64-w64-mingw32/lib \
+	-l:libws2_32.a -l:libwsock32.a -l:libwinpthread.a
+
+SQLITE3_CFLAGS=-I./sqlite3
+SQLITE3_LFLAGS=-lsqlite3
+
+all: app.exe super-repl.exe
+
+app.exe: app.c
+	$(CC) $(CFLAGS) \
+	$(JANET_CFLAGS) \
+	$(SQLITE3_CFLAGS) \
+	$(CURL_CFLAGS) \
+	$(IUP_CFLAGS) \
+	$(CIRCLET_CFLAGS) \
+	build/janet/build/janet.c $< -o $@  \
+	$(JANET_LFLAGS) \
+	$(SQLITE3_LFLAGS) \
+	$(CURL_LFLAGS) \
+	$(IUP_LFLAGS) \
+	$(CIRCLET_LFLAGS) \
+	$(LFLAGS)
+
+super-repl.exe: super.c
+	$(CC) $(CFLAGS) \
+	$(JANET_CFLAGS) \
+	$(SQLITE3_CFLAGS) \
+	$(CURL_CFLAGS) \
+	$(IUP_CFLAGS) \
+	$(CIRCLET_CFLAGS) \
+	build/janet/build/janet.c $< -o $@  \
+	$(JANET_LFLAGS) \
+	$(SQLITE3_LFLAGS) \
+	$(CURL_LFLAGS) \
+	$(IUP_LFLAGS) \
+	$(CIRCLET_LFLAGS) \
+	$(LFLAGS)
+
+.PHONY:

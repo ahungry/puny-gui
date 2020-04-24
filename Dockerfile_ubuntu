@@ -1,0 +1,33 @@
+# -*- mode: dockerfile; -*-
+
+# This should fully encapsulate building a widely compatible GNU/Linux binary
+
+FROM ubuntu:18.04
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
+  apt-get install -y --no-install-recommends \
+  build-essential \
+  pkg-config \
+  libgtk+-3-dev \
+  libcurl4-openssl-dev \
+  libsqlite3-dev \
+  wget \
+  git
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
+  apt-get install -y --no-install-recommends \
+  ca-certificates
+
+RUN mkdir /app
+
+RUN echo Building off 1.9.0 Janet
+RUN git clone --depth=1 https://github.com/ahungry/janet-code /app
+
+WORKDIR /app/target/super
+
+RUN ./get-iup-linux-files.sh
+RUN ./get-janet.sh
+RUN make -Bj
+RUN ./package-linux.sh
+
+CMD echo
