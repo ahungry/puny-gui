@@ -31,6 +31,17 @@ bundled with it (via dll for Windows or dynamic linking for GNU/Linux):
 None - just download, inflate, and start hacking a new app together
 for some users to enjoy.
 
+Due to the shared linking, you/your users *will* need to ensure you
+have the appropriate shared libs/packages installed on your host *nix
+system, as such:
+
+- gtk+-3
+- curl
+- sqlite
+
+For very lazy Ubuntu users, they can simply run the included
+'./ubuntu-packages.sh' script.
+
 # Building
 
 See Makefile for GNU/Linux and Wakefile for Windows (I built the
