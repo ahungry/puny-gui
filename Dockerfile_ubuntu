@@ -20,7 +20,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
 
 RUN mkdir /app
 
-RUN echo Building off 1.9.0 Janet
+RUN echo Building off 1.9.0 Janet with fixed build script
 RUN git clone --depth=1 https://github.com/ahungry/puny-gui /app
 
 WORKDIR /app
