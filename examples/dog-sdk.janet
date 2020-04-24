@@ -7,7 +7,9 @@
   (-> (client/json-get host)
       (get "message")))
 
-(defn get-image-content [url]
+(defn get-image-content
+  "Fetches remote dog picture and saves to disk."
+  [url]
   (def img (client/http-get url))
   (spit "dog.jpg" img))
 
