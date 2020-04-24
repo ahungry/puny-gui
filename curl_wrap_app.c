@@ -12017,8 +12017,86 @@ new_curl_slist_null_wrapped (int32_t argc, Janet *argv)
   return janet_wrap_pointer (result);
 }
 
+struct dummy_memory {
+  char *response;
+  size_t size;
+};
+
+// https://curl.haxx.se/libcurl/c/CURLOPT_WRITEFUNCTION.html
+static size_t
+dummy_callback (void *data, size_t size, size_t nmemb, void *userp)
+{
+  size_t realsize = size * nmemb;
+  struct dummy_memory *mem = (struct dummy_memory *) userp;
+
+  char *ptr = realloc (mem->response, mem->size + realsize + 1);
+
+  if (ptr == NULL)
+    {
+      return 0;  /* out of memory! */
+    }
+
+  mem->response = ptr;
+  memcpy (&(mem->response[mem->size]), data, realsize);
+  mem->size += realsize;
+  mem->response[mem->size] = 0;
+
+  return realsize;
+}
+
+static Janet
+curl_dummy_callback_wrapped (int32_t argc, Janet *argv)
+{
+  janet_fixarity (argc, 0);
+
+  return janet_wrap_pointer (dummy_callback);
+}
+
+static Janet
+curl_make_buffer_wrapped (int32_t argc, Janet *argv)
+{
+  janet_fixarity (argc, 0);
+
+  struct dummy_memory * dummy = malloc (sizeof (struct dummy_memory));
+
+  dummy->response = malloc (1);
+  dummy->size = 0;
+
+  return janet_wrap_pointer (dummy);
+}
+
+static Janet
+curl_get_buffer_content_wrapped (int32_t argc, Janet *argv)
+{
+  janet_fixarity (argc, 1);
+
+  struct dummy_memory *mem = (struct dummy_memory *) janet_getpointer (argv, 0);
+  const uint8_t *s = janet_string (mem->response, mem->size);
+
+  return janet_wrap_string (s);
+}
+
+static Janet
+free_wrapped (int32_t argc, Janet *argv)
+{
+  janet_fixarity (argc, 1);
+
+  void * ptr = (void *) janet_getpointer (argv, 0);
+
+  free (ptr);
+
+  return janet_wrap_nil ();
+}
+
+
 static const JanetReg
 curl_cfuns[] = {
+  {"curl-make-buffer", curl_make_buffer_wrapped, "Make a buffer to store response"},
+  {"curl-get-buffer-content", curl_get_buffer_content_wrapped, "Get a buffer response"},
+  {"free", free_wrapped, "Free the memory pointed to by ptr"},
+  {
+    "curl-dummy-callback", curl_dummy_callback_wrapped, "Dummy callback"
+  },
   {
     "const-CURL-SOCKET-BAD", const_CURL_SOCKET_BAD_wrapped, "Return the constant value."
   },{
@@ -14111,7 +14189,7 @@ curl_cfuns[] = {
     "curl-easy-setopt-pointer", curl_easy_setopt_pointer_wrapped, "SWIG generated"
   },{
     "new-curl-slist-null", new_curl_slist_null_wrapped, "SWIG generated"
-  },  {
+  }, {
     NULL, NULL, NULL
   }
 };
