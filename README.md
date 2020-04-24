@@ -16,8 +16,8 @@ to fit your needs.
 
 For iterative development, you can run 'super-repl' instead of 'app'.
 
-The supports the following, thanks to the underlying software being
-bundled with it:
+The kit supports the following, thanks to the underlying software being
+bundled with it (via dll for Windows or dynamic linking for GNU/Linux):
 
 - Script Language (via https://janet-lang.org)
 - Native GUI (via IUP http://webserver2.tecgraf.puc-rio.br/iup/en/)
@@ -25,6 +25,16 @@ bundled with it:
 - Web Server (via Mongoose https://github.com/cesanta/mongoose)
 - Persistence (via sqlite https://sqlite.org/index.html)
 - JSON (via https://github.com/janet-lang/json)
+
+# Installation
+
+None - just download, inflate, and start hacking a new app together
+for some users to enjoy.
+
+# Building
+
+See Makefile for GNU/Linux and Wakefile for Windows (I built the
+release things for Windows using mingw64).
 
 # License
 
