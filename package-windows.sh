@@ -1,8 +1,8 @@
 #!/bin/sh
 
-rm super-janet-app-win64.zip
+rm puny-gui-win64.zip
 
-zip -r super-janet-app-win64.zip \
+zip -r puny-gui-win64.zip \
     ./*.janet \
     ./*.dll \
     ./*.exe \

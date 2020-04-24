@@ -21,9 +21,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
 RUN mkdir /app
 
 RUN echo Building off 1.9.0 Janet
-RUN git clone --depth=1 https://github.com/ahungry/janet-code /app
+RUN git clone --depth=1 https://github.com/ahungry/puny-gui /app
 
-WORKDIR /app/target/super
+WORKDIR /app
 
 RUN ./get-iup-linux-files.sh
 RUN ./get-janet.sh

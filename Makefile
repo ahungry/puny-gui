@@ -63,16 +63,16 @@ super-repl.bin: super.c
 	$(LFLAGS)
 
 docker-build:
-	docker build -t super_test_build . -f Dockerfile_ubuntu
+	docker build -t puny_gui_build . -f Dockerfile_ubuntu
 
 docker-get:
-	docker cp super_test_run:/app/target/super/super-janet-app-linux64.tar.gz ./
+	docker cp puny_gui_run:/app/puny-gui-linux64.tar.gz ./
 
 docker-run:
-	$(info docker cp super_test:/app/target/super/super-janet-app-linux64.tar.gz ./)
-	-docker rm super_test_run
-	docker run --name super_test_run \
-	-it super_test_build
+	$(info docker cp puny_gui:/app/puny-gui-linux64.tar.gz ./)
+	-docker rm puny_gui_run
+	docker run --name puny_gui_run \
+	-it puny_gui_build
 
 demo-dog:
 	./super-repl.bin ./examples/dog-gui.janet

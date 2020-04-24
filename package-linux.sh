@@ -1,6 +1,6 @@
 #!/bin/sh
 
-dir=super-janet-app-linux64
+dir=puny-gui-linux64
 
 rm -fr $dir
 rm $dir.tar.gz
