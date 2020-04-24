@@ -76,4 +76,7 @@ super-repl.exe: super.c
 	$(CIRCLET_LFLAGS) \
 	$(LFLAGS)
 
-.PHONY:
+demo-dog:
+	wine ./super-repl.exe ./examples/dog-gui.janet
+
+.PHONY: demo-dog

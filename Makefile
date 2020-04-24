@@ -74,4 +74,7 @@ docker-run:
 	docker run --name super_test_run \
 	-it super_test_build
 
-.PHONY: docker-ubuntu
+demo-dog:
+	./super-repl.bin ./examples/dog-gui.janet
+
+.PHONY: docker-ubuntu demo-dog
