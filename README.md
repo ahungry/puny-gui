@@ -1,52 +1,41 @@
-# Super app/repl
+# Puny GUI
 
-So far the following builds in both/works in one or the other:
+This is a small cross-platform (native) GUI setup (GNU/Linux + Windows).
 
-- IUP (GUI) - GNU/Linux (.so) / Windows (static)
-- cURL - GNU/Linux (.so) / Windows (dll)
-- circlet (HTTP server) - GNU/Linux (static) / Windows (static)
-- sqlite3 - GNU/Linux (shared) / Windows (dll)
-- json - GNU/Linux (static) / Windows (static)
+To start creating GUIs requires NO compilation, installation, or large
+downloads.
 
-The process had to be updated from modifying/including in app level to
-recompiling the amalg janet source, otherwise non BIF will not work in
-the thread callbacks due to symbol missing in global resolution stuff.
+Everything you need to get started can be found on the releases tab
+here:
+
+  https://github.com/ahungry/puny-gui/releases
+
+Simply download the appropriate release bundles and start modifying
+the app.janet and/or other .janet files to adjust the basic template
+to fit your needs.
+
+For iterative development, you can run 'super-repl' instead of 'app'.
+
+The supports the following, thanks to the underlying software being
+bundled with it:
+
+- Script Language (via https://janet-lang.org)
+- Native GUI (via IUP http://webserver2.tecgraf.puc-rio.br/iup/en/)
+- Web Client (via cURL https://curl.haxx.se/)
+- Web Server (via Mongoose https://github.com/cesanta/mongoose)
+- Persistence (via sqlite https://sqlite.org/index.html)
+- JSON (via https://github.com/janet-lang/json)
 
 # License
 
-Copyright Matthew Carter <m@ahungry.com>
+All linked/included works that are not my own are subject to their
+original licenses (the majority are MIT, Mongoose is GPLv2).
 
-Some works are under MIT license, some are GPLv2.
+You can find the original sources on the associated links above.
 
-All source is available at this repository you fetched the file from.
+All original works are copyright Matthew Carter <m@ahungry.com> and
+licensed under GPLv3.
 
 If you make a derivative work, you need to ahdere to the license here
 (as well as those in the dependencies, which may be GPLv2 in the case
 of the mongoose/circlet stuff).
-
-
-# TODO
-
-Try out these:
-
-    "https://github.com/janet-lang/sqlite3.git"
-    "https://github.com/janet-lang/argparse.git"
-    "https://github.com/janet-lang/path.git"
-    "https://github.com/andrewchambers/janet-uri.git"
-    "https://github.com/andrewchambers/janet-jdn.git"
-    "https://github.com/andrewchambers/janet-flock.git"
-    "https://github.com/andrewchambers/janet-process.git"
-    "https://github.com/andrewchambers/janet-sh.git"
-    "https://github.com/andrewchambers/janet-base16.git"
-
-# Getting IUP Files (iup, im, cd)
-
-On GNU/Linux and/or Windows, iup works with static or dynamic linking,
-im only works with dynamic because it has cpp only stuff in the
-archive file, and cd was not required.
-
-# TODO Cleanup
-
-Perhaps remove mongoose/circlet - it segfaults on Windows (probably
-requires windows special flags to be set in source, which are not
-being set)...
