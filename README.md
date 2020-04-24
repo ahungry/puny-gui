@@ -1,9 +1,15 @@
 # Puny GUI
 
+
 This is a small cross-platform (native) GUI setup (GNU/Linux + Windows).
 
 To start creating GUIs requires NO compilation, installation, or large
-downloads.
+downloads (entire bin/exe setup is less than 5 MB).
+
+You can see the complete source for a GUI to fetch a random dog
+picture on a single screen (with said resultant app):
+
+![ahubu](https://raw.githubusercontent.com/ahungry/puny-gui/master/dog-sample.png)
 
 Everything you need to get started can be found on the releases tab
 here:
