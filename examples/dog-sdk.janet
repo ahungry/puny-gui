@@ -13,5 +13,6 @@
   (def img (client/http-get url))
   (spit "dog.jpg" img))
 
-(-> (get-random-dog random-host)
-    get-image-content)
+(defn main [_ ]
+  (-> (get-random-dog random-host)
+      get-image-content))
