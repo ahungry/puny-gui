@@ -53,6 +53,38 @@ For very lazy Ubuntu users, they can simply run the included
 See Makefile for GNU/Linux and Wakefile for Windows (I built the
 release things for Windows using mingw64).
 
+Running 'make' depends on having a nested Janet source code in the
+build directory.
+
+The nested Janet source code depends upon having IUP files in the
+build directory.
+
+Building anything at all requires the necessary build files.
+
+If you want a widely distributable GNU/Linux build, you may want to
+copy me and do so in an Ubuntu 18.04 docker image, by using the
+attached dockerfile with the following make commands:
+
+```sh
+make docker-build docker-run docker-get
+```
+
+This will pull a produced tarball out of the docker image and into
+your root repository directory.
+
+If you like doing things manually, ensure you have done the following
+in this order:
+
+```sh
+./ubuntu-build-packages.sh # For Ubuntu users only!
+./get-iup-linux-files.sh   # Will download IUP GNU/Linux files
+./get-janet.sh             # Will download + build a custom Janet runtime
+make -Bj                   # Will force build app.bin + super-repl.bin
+```
+
+Now enjoy your custom build.
+
+
 # License
 
 All linked/included works that are not my own are subject to their
