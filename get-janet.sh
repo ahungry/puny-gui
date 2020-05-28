@@ -1,7 +1,8 @@
 #!/bin/sh
 
 #branch=feature/Add-more-builtins
-branch=feature/Add-more-builtins-20200422
+#branch=feature/Add-more-builtins-20200422
+branch=feature/Add-more-builtins-20200515
 top=$(pwd)
 
 rm -fr build/janet
@@ -21,7 +22,7 @@ git clone \
 # cp json/json.c        build/janet/src/
 
 cd build/janet
-make -j8
+make -j
 
 # cd $top
 

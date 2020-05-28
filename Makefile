@@ -4,6 +4,7 @@
 
 CC=gcc
 
+#-fsanitize=address -g
 CFLAGS=-Wall -Wno-unused-variable -Wno-unused-function -Wno-unused-parameter -Wno-format-truncation -std=gnu99 -fPIC
 LFLAGS=-lm -pthread -lz
 

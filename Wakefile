@@ -4,8 +4,8 @@
 
 CC=x86_64-w64-mingw32-gcc
 
-CFLAGS=-Wall -std=c99 -fPIC
-LFLAGS=-lm -pthread -lwinmm \
+CFLAGS=-Wall -std=c99 -fPIC -D_WIN32_WINNT=0x0600
+LFLAGS=-lm -pthread -lwinmm -lmswsock -ladvapi32 \
 	-lmingw32 -lopengl32 -lpangowin32-1.0 -lgdi32 -lws2_32 -luuid -lcomctl32 -lole32  \
 	-lcomdlg32
 
