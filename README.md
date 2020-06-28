@@ -32,6 +32,11 @@ bundled with it (via dll for Windows or dynamic linking for GNU/Linux):
 - Persistence (via sqlite https://sqlite.org/index.html)
 - JSON (via https://github.com/janet-lang/json)
 
+To follow along with a step by step process, use the blog/tutorial
+here:
+
+https://ahungry.com/blog/2020-04-24-Puny-GUI-Puppy-Finder.html
+
 # Installation
 
 None - just download, inflate, and start hacking a new app together
